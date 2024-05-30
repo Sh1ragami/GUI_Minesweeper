@@ -84,9 +84,11 @@ function updateCells(openedCells) {
     openedCells.forEach(cell => {
         const cellElement = document.querySelector(`[data-row='${cell.row}'][data-col='${cell.col}']`);
         cellElement.classList.add('open');
-        if (cell.adjacentMines > 0) {
-            cellElement.classList.add('number');
-            cellElement.textContent = cell.adjacentMines;
+        for (let i = 0; i <= 8; i++) {
+            if (cell.adjacentMines > i) {
+                cellElement.classList.add('number' + i);
+                cellElement.textContent = cell.adjacentMines
+            }
         }
     });
 }

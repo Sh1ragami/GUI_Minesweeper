@@ -39,8 +39,63 @@ body {
     background-size: cover;
 }
 
-.cell.number {
+.cell.number0 {
     background-image: url("images/openCell.avif");
     background-size: cover;
+}
+
+.cell.number1 {
+    background-image: url("images/openCell.avif");
+    background-size: cover;
+    color: #0000F7;
+    font-weight: bold;
+}
+
+.cell.number2 {
+    background-image: url("images/openCell.avif");
+    background-size: cover;
+    color: #007C00;
+    font-weight: bold;
+}
+
+.cell.number3 {
+    background-image: url("images/openCell.avif");
+    background-size: cover;
+    color: #EC1F1F;
+    font-weight: bold;
+}
+
+.cell.number4 {
+    background-image: url("images/openCell.avif");
+    background-size: cover;
+    color: #00007C;
+    font-weight: bold;
+}
+
+.cell.number5 {
+    background-image: url("images/openCell.avif");
+    background-size: cover;
+    color: #7C0000;
+    font-weight: bold;
+}
+
+.cell.number6 {
+    background-image: url("images/openCell.avif");
+    background-size: cover;
+    color: #007C7C;
+    font-weight: bold;
+}
+
+.cell.number7 {
+    background-image: url("images/openCell.avif");
+    background-size: cover;
+    color: #000000;
+    font-weight: bold;
+}
+
+.cell.number8 {
+    background-image: url("images/openCell.avif");
+    background-size: cover;
+    color: #7C7C7C;
     font-weight: bold;
 }
