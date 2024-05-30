@@ -22,7 +22,7 @@ function initializeGame($rows, $cols, $mines) {
     }
 
     foreach ($minePositions as $position) {
-        incrementAdjacentCells($board, $position[0], $position[1]);
+        calculatorMines($board, $position[0], $position[1]);
     }
 
     $_SESSION['board'] = $board;
@@ -35,7 +35,7 @@ function initializeGame($rows, $cols, $mines) {
     echo json_encode(['board' => $board, 'rows' => $rows, 'cols' => $cols]);
 }
 
-function incrementAdjacentCells(&$board, $row, $col) {
+function calculatorMines(&$board, $row, $col) {
     for ($i = $row - 1; $i <= $row + 1; $i++) {
         for ($j = $col - 1; $j <= $col + 1; $j++) {
             if (isset($board[$i][$j]) && $board[$i][$j] !== 'M') {

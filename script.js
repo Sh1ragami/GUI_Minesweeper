@@ -32,12 +32,12 @@ function createGameBoard(data) {
             cellElement.classList.add('cell');
             cellElement.dataset.row = rowIndex;
             cellElement.dataset.col = colIndex;
-            cellElement.addEventListener('click', (e) => {
-                if (e.shiftKey) {
-                    toggleFlag(cellElement);
-                } else {
-                    openCell(cellElement);
-                }
+            cellElement.addEventListener('click', () => {
+                openCell(cellElement);
+            });
+            cellElement.addEventListener('contextmenu', (e) => {
+                e.preventDefault();
+                toggleFlag(cellElement);
             });
             gameContainer.appendChild(cellElement);
         });
@@ -67,11 +67,11 @@ function openCell(cellElement) {
         .then(data => {
             if (data.result === 'mine') {
                 showAllMines(data.board);
-                alert('Game Over!');
+                alert('Game Over!!');
                 document.getElementById('startGame').disabled = false;
             } else if (data.result === 'clear') {
                 updateCells(data.openedCells);
-                alert('Congratulations! You cleared the game!');
+                alert('Game Clear!');
                 document.getElementById('startGame').disabled = false;
             } else {
                 updateCells(data.openedCells);
