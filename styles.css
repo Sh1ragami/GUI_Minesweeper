@@ -9,6 +9,7 @@ body {
 #gameContainer {
     display: grid;
     margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .cell {
@@ -18,22 +19,28 @@ body {
     justify-content: center;
     align-items: center;
     border: 1px solid #ccc;
+    background-image: url("images/cell.avif");
+    background-size: cover;
     cursor: pointer;
 }
 
 .cell.flag {
-    background-color: blue;
+    background-image: url("images/flag.avif");
+    background-size: cover;
 }
 
 .cell.mine {
-    background-color: red;
+    background-image: url("images/mine.avif");
+    background-size: cover;
 }
 
 .cell.open {
-    background-color: #eee;
+    background-image: url("images/openCell.avif");
+    background-size: cover;
 }
 
 .cell.number {
-    background-color: #ddd;
+    background-image: url("images/openCell.avif");
+    background-size: cover;
     font-weight: bold;
 }

@@ -9,7 +9,8 @@ if (isset($request['rows']) && isset($request['cols']) && isset($request['mines'
     openCell($request['row'], $request['col']);
 }
 
-function initializeGame($rows, $cols, $mines) {
+function initializeGame($rows, $cols, $mines)
+{
     $board = array_fill(0, $rows, array_fill(0, $cols, 0));
     $minePositions = [];
 
@@ -35,7 +36,8 @@ function initializeGame($rows, $cols, $mines) {
     echo json_encode(['board' => $board, 'rows' => $rows, 'cols' => $cols]);
 }
 
-function calculatorMines(&$board, $row, $col) {
+function calculatorMines(&$board, $row, $col)
+{
     for ($i = $row - 1; $i <= $row + 1; $i++) {
         for ($j = $col - 1; $j <= $col + 1; $j++) {
             if (isset($board[$i][$j]) && $board[$i][$j] !== 'M') {
@@ -45,7 +47,8 @@ function calculatorMines(&$board, $row, $col) {
     }
 }
 
-function openCell($row, $col) {
+function openCell($row, $col)
+{
     $board = $_SESSION['board'];
     $opened = &$_SESSION['opened'];
     $rows = $_SESSION['rows'];
@@ -70,7 +73,8 @@ function openCell($row, $col) {
     }
 }
 
-function openAdjacentCells($board, &$opened, $row, $col, &$openedCells, &$openedCount) {
+function openAdjacentCells($board, &$opened, $row, $col, &$openedCells, &$openedCount)
+{
     if (!isset($board[$row][$col]) || $opened[$row][$col]) {
         return;
     }
@@ -88,4 +92,3 @@ function openAdjacentCells($board, &$opened, $row, $col, &$openedCells, &$opened
         }
     }
 }
-
