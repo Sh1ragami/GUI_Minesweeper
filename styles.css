@@ -10,7 +10,7 @@ body {
     display: grid;
     margin-top: 20px;
     margin-bottom: 20px;
-    background-image: url("images/cell.avif");
+    background-image: url("images/openCell.avif");
 }
 
 .cell {
