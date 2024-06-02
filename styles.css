@@ -10,6 +10,7 @@ body {
     display: grid;
     margin-top: 20px;
     margin-bottom: 20px;
+    background-color: #000000;
 }
 
 .cell {

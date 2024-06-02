@@ -3,7 +3,7 @@ document.getElementById('startGame').addEventListener('click', () => {
     const cols = parseInt(document.getElementById('cols').value);
     const mines = parseInt(document.getElementById('mines').value);
 
-    if (isNaN(rows) || isNaN(cols) || isNaN(mines) || rows <= 0 || cols <= 0 || mines <= 0) {
+    if (isNaN(rows) || isNaN(cols) || isNaN(mines) || rows <= 0 || cols <= 0 || mines <= 0 || mines >= rows*cols) {
         alert('有効な数値を入力してください。');
         return;
     }
@@ -22,7 +22,7 @@ document.getElementById('startGame').addEventListener('click', () => {
 
 function createGameBoard(data) {
     const gameContainer = document.getElementById('gameContainer');
-    gameContainer.innerHTML = '';   //毎回削除
+    gameContainer.innerHTML = '';
     gameContainer.style.gridTemplateRows = `repeat(${data.rows}, 30px)`;
     gameContainer.style.gridTemplateColumns = `repeat(${data.cols}, 30px)`;
 
@@ -32,8 +32,9 @@ function createGameBoard(data) {
             cellElement.classList.add('cell');
             cellElement.dataset.row = rowIndex;
             cellElement.dataset.col = colIndex;
+            
             cellElement.addEventListener('click', () => {
-                openCell(cellElement);
+                openCell(cellElement, true);
             });
             cellElement.addEventListener('contextmenu', (e) => {
                 e.preventDefault();
@@ -52,7 +53,7 @@ function toggleFlag(cellElement) {
     }
 }
 
-function openCell(cellElement) {
+function openCell(cellElement, isFirstClick = false) {
     const row = cellElement.dataset.row;
     const col = cellElement.dataset.col;
 
@@ -61,7 +62,7 @@ function openCell(cellElement) {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ action: 'open', row, col })
+        body: JSON.stringify({ action: 'open', row, col, isFirstClick })
     })
         .then(response => response.json())
         .then(data => {
