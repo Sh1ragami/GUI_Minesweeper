@@ -9,7 +9,7 @@ body {
     display: grid;
     margin-top: 20px;
     margin-bottom: 20px;
-    background-color: #c6c6c6;
+    background-color: #7C7C7C;
 }
 
 .cell {
@@ -44,58 +44,47 @@ body {
     background-size: cover;
 }
 
-.cell.number1 {
-    background-image: url("images/openCell.avif");
-    background-size: cover;
-    color: #0000F7;
-    font-weight: bold;
-}
-
-.cell.number2 {
-    background-image: url("images/openCell.avif");
-    background-size: cover;
-    color: #007C00;
-    font-weight: bold;
-}
-
-.cell.number3 {
-    background-image: url("images/openCell.avif");
-    background-size: cover;
-    color: #EC1F1F;
-    font-weight: bold;
-}
-
-.cell.number4 {
-    background-image: url("images/openCell.avif");
-    background-size: cover;
-    color: #00007C;
-    font-weight: bold;
-}
-
-.cell.number5 {
-    background-image: url("images/openCell.avif");
-    background-size: cover;
-    color: #7C0000;
-    font-weight: bold;
-}
-
-.cell.number6 {
-    background-image: url("images/openCell.avif");
-    background-size: cover;
-    color: #007C7C;
-    font-weight: bold;
-}
-
-.cell.number7 {
-    background-image: url("images/openCell.avif");
-    background-size: cover;
-    color: #000000;
-    font-weight: bold;
-}
-
+.cell.number1,
+.cell.number2,
+.cell.number3,
+.cell.number4,
+.cell.number5,
+.cell.number6,
+.cell.number7,
 .cell.number8 {
     background-image: url("images/openCell.avif");
     background-size: cover;
-    color: #7C7C7C;
     font-weight: bold;
+}
+
+.cell.number1 {
+    color: #0000F7;
+}
+
+.cell.number2 {
+    color: #007C00;
+}
+
+.cell.number3 {
+    color: #EC1F1F;
+}
+
+.cell.number4 {
+    color: #00007C;
+}
+
+.cell.number5 {
+    color: #7C0000;
+}
+
+.cell.number6 {
+    color: #007C7C;
+}
+
+.cell.number7 {
+    color: #000000;
+}
+
+.cell.number8 {
+    color: #7C7C7C;
 }

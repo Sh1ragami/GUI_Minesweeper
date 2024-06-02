@@ -3,7 +3,7 @@ document.getElementById('startGame').addEventListener('click', () => {
     const cols = parseInt(document.getElementById('cols').value);
     const mines = parseInt(document.getElementById('mines').value);
 
-    if (isNaN(rows) || isNaN(cols) || isNaN(mines) || rows <= 0 || cols <= 0 || mines <= 0 || mines >= rows*cols) {
+    if (isNaN(rows) || isNaN(cols) || isNaN(mines) || rows <= 0 || cols <= 0 || mines <= 0 || mines >= rows * cols) {
         alert('有効な数値を入力してください。');
         return;
     }
@@ -32,7 +32,7 @@ function createGameBoard(data) {
             cellElement.classList.add('cell');
             cellElement.dataset.row = rowIndex;
             cellElement.dataset.col = colIndex;
-            
+
             cellElement.addEventListener('click', () => {
                 openCell(cellElement, true);
             });
@@ -46,11 +46,7 @@ function createGameBoard(data) {
 }
 
 function toggleFlag(cellElement) {
-    if (cellElement.classList.contains('flag')) {
-        cellElement.classList.remove('flag');
-    } else {
-        cellElement.classList.add('flag');
-    }
+    cellElement.classList.toggle('flag');
 }
 
 function openCell(cellElement, isFirstClick = false) {
@@ -68,11 +64,11 @@ function openCell(cellElement, isFirstClick = false) {
         .then(data => {
             if (data.result === 'mine') {
                 showAllMines(data.board);
-                alert('Game Over!!');
+                alert('ゲームオーバー!!');
                 document.getElementById('startGame').disabled = false;
             } else if (data.result === 'clear') {
                 updateCells(data.openedCells);
-                alert('Game Clear!');
+                alert('ゲームクリア!');
                 document.getElementById('startGame').disabled = false;
             } else {
                 updateCells(data.openedCells);
@@ -84,12 +80,9 @@ function openCell(cellElement, isFirstClick = false) {
 function updateCells(openedCells) {
     openedCells.forEach(cell => {
         const cellElement = document.querySelector(`[data-row='${cell.row}'][data-col='${cell.col}']`);
-        cellElement.classList.add('open');
-        for (let i = 0; i <= 8; i++) {
-            if (cell.adjacentMines > i) {
-                cellElement.classList.add('number' + i);
-                cellElement.textContent = cell.adjacentMines
-            }
+        cellElement.classList.add('open', `number${cell.adjacentMines}`);
+        if (cell.adjacentMines > 0) {
+            cellElement.textContent = cell.adjacentMines;
         }
     });
 }
