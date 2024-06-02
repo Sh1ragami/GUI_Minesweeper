@@ -26,11 +26,13 @@ body {
 }
 
 .cell.flag {
+    background-image: url("images/cell.avif");
     background-image: url("images/flag.avif");
     background-size: cover;
 }
 
 .cell.mine {
+    background-image: url("images/cell.avif");
     background-image: url("images/mine.avif");
     background-size: cover;
 }
