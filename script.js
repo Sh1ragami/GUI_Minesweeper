@@ -1,9 +1,10 @@
 document.getElementById('startGame').addEventListener('click', () => {
+
     const rows = parseInt(document.getElementById('rows').value);
     const cols = parseInt(document.getElementById('cols').value);
     const mines = parseInt(document.getElementById('mines').value);
 
-    if (isNaN(rows) || isNaN(cols) || isNaN(mines) || rows <= 0 || cols <= 0 || mines <= 0 || mines >= rows * cols) {
+    if (rows <= 0 || cols <= 0 || mines <= 0 || mines >= rows * cols) {
         alert('有効な数値を入力してください。');
         return;
     }
@@ -34,6 +35,9 @@ function createGameBoard(data) {
             cellElement.dataset.col = colIndex;
 
             cellElement.addEventListener('click', () => {
+                const audio = new Audio('audio/digAudio.mp3');
+                audio.currentTime = 0;  // ここで、'audio'のcurrentTimeを0にする必要があります
+                audio.play();
                 openCell(cellElement, true);
             });
             cellElement.addEventListener('contextmenu', (e) => {
