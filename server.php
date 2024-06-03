@@ -13,6 +13,7 @@ function initializeGame($rows, $cols, $mines)
 {
     $board = array_fill(0, $rows, array_fill(0, $cols, 0));
     $minePositions = [];
+    
     while (count($minePositions) < $mines) {
         $position = [rand(0, $rows - 1), rand(0, $cols - 1)];
         if (!in_array($position, $minePositions)) {
