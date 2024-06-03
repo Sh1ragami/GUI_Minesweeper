@@ -8,6 +8,8 @@ document.getElementById('startGame').addEventListener('click', () => {
         alert('有効な数値を入力してください。');
         return;
     }
+    
+    alert('操作説明\n　左クリック：採掘\n　右クリック：フラグ');
 
     fetch('server.php', {
         method: 'POST',
@@ -35,13 +37,16 @@ function createGameBoard(data) {
             cellElement.dataset.col = colIndex;
 
             cellElement.addEventListener('click', () => {
-                const audio = new Audio('audio/digAudio.mp3');
-                audio.currentTime = 0;  // ここで、'audio'のcurrentTimeを0にする必要があります
+                const audio = new Audio('audio/sound.mp3');
+                audio.currentTime = 0;
                 audio.play();
                 openCell(cellElement, true);
             });
             cellElement.addEventListener('contextmenu', (e) => {
                 e.preventDefault();
+                const audio = new Audio('audio/sound.mp3');
+                audio.currentTime = 0;
+                audio.play();
                 toggleFlag(cellElement);
             });
             gameContainer.appendChild(cellElement);

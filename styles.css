@@ -6,6 +6,10 @@ body {
     background-color: rgba(0, 0, 0, 0.788);
 }
 
+.menu {
+    background-color: #00007C;
+}
+
 h1 {
     font-size: 40px;
     line-height: 1;
@@ -56,11 +60,11 @@ button {
     height: 40px;
     font-weight: bold;
     border-bottom: 5px solid #b46436;
-    transition: 0.3s;
+    transition: 0.2s;
     background-color: #eb8b54;
 }
 
-.original-button:hover {
+button:active {
     border-bottom-width: 0;
     transform: translateY(5px);
 }
@@ -78,21 +82,19 @@ button {
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid #ccc;
+    border: 1px solid #888888;
     background-image: url("images/cell.avif");
     background-size: cover;
     cursor: pointer;
 }
 
 .cell.flag {
-    background-image: url("images/cell.avif");
-    background-image: url("images/flag.avif");
+    background-image: url("images/flag.png");
     background-size: cover;
 }
 
 .cell.mine {
-    background-image: url("images/cell.avif");
-    background-image: url("images/mine.avif");
+    background-image: url("images/mine.png");
     background-size: cover;
 }
 
@@ -149,4 +151,11 @@ button {
 
 .cell.number8 {
     color: #7C7C7C;
+}
+
+@media screen and (max-width: 600px) {
+    h1 {
+        font-size: 30px;
+        text-shadow: 4px 4px 0px rgba(242, 13, 13, 0.5), 8px 8px 0px rgba(0, 0, 0, 0.2);
+    }
 }
