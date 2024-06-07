@@ -167,6 +167,14 @@ button:active {
         text-shadow: 4px 4px 0px rgba(242, 13, 13, 0.5), 6px 6px 0px rgba(0, 0, 0, 0.2);
     }
 
+    h2 {
+        font-size: 13px;
+    }
+
+    p {
+        font-size: 16px;
+    }
+
     #gameContainer {
         transform: scale(0.8);
         margin-top: 0px;
