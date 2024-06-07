@@ -33,8 +33,6 @@ function startGame() {
 
             // backMenuボタンを押した後、startGameボタンを有効にする
             document.getElementById('startGame').disabled = false;
-            // backMenuボタンを押した後にクリックイベントを再度追加
-            document.getElementById('startGame').addEventListener('click', startGame);
             return;
         });
 
@@ -108,10 +106,12 @@ function openCell(cellElement, isFirstClick = false) {
                 showAllMines(data.board);
                 alert('GAME OVER!!');
                 document.getElementById('startGame').disabled = false;
+
             } else if (data.result === 'clear') {
                 updateCells(data.openedCells);
                 alert('GAME CLEAR!');
                 document.getElementById('startGame').disabled = false;
+
             } else {
                 updateCells(data.openedCells);
             }
@@ -203,4 +203,7 @@ function createMenuBoard() {
     startGameButton.textContent = 'START GAME';
     nav.appendChild(document.createElement('br'));
     nav.appendChild(startGameButton);
+
+    // START GAMEボタンのクリックイベントを追加
+    startGameButton.addEventListener('click', startGame);
 }

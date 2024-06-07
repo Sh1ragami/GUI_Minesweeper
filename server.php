@@ -11,16 +11,20 @@ if (isset($request['rows']) && isset($request['cols']) && isset($request['mines'
 
 function initializeGame($rows, $cols, $mines)
 {
-    $board = array_fill(0, $rows, array_fill(0, $cols, 0));
-
+    $board = createEmptyBoard($rows, $cols);
     $_SESSION['board'] = $board;
     $_SESSION['rows'] = $rows;
     $_SESSION['cols'] = $cols;
     $_SESSION['mines'] = $mines;
-    $_SESSION['opened'] = array_fill(0, $rows, array_fill(0, $cols, false));
+    $_SESSION['opened'] = createEmptyBoard($rows, $cols);
     $_SESSION['openedCount'] = 0;
     $_SESSION['first'] = true;
     echo json_encode(['board' => $board, 'rows' => $rows, 'cols' => $cols]);
+}
+
+function createEmptyBoard($rows, $cols)
+{
+    return array_fill(0, $rows, array_fill(0, $cols, 0));
 }
 
 function putMines(&$board, $rows, $cols, $mines, $safeRow, $safeCol)
@@ -73,7 +77,7 @@ function openCell($row, $col)
         session_destroy();
         return;
     }
-    
+
     $openedCells = [];
     openAroundCells($board, $opened, $row, $col, $openedCells, $openedCount, true);
     if ($openedCount === $rows * $cols - $mines) {

@@ -25,37 +25,22 @@
 
         <button id="startGame">START GAME</button>
     </nav>
-    <!-- <button id="scrollBoard">Scroll Center</button> -->
 
     <div id="gameContainer">
         <!-- この中にマインスイーパーの盤を作成 -->
     </div>
 
+    <h2>---------------------------------  ゲームのルール  --------------------------------</h2>
+    <p>
+        ゲーム画面は正方形のマスが敷き詰められた長方形のフィールドから構成されている。それぞれの<br>
+        マスは開けることができるが、地雷の置かれているマスを開けると負けとなる。地雷の置かれてい<br>
+        ないマスを開けたときは、隣接する8方向のマスのいずれかに地雷がある場合はその個数が表示さ<br>
+        れ、隣接するマスに地雷が置かれていないときは、それらが自動的に開けられる。地雷の置かれて<br>
+        いないマスをすべて開ければ勝ちとなる。
+    </p>
+
     <script src="script.js"></script>
 
-    <!-- startGameボタンを押したときに、ゲームボードの中心にページを移動する -->
-    <!-- <script>
-        document.getElementById('scrollBoard').addEventListener('click', function () {
-            const inputRows = document.getElementById('rows').value;
-            const inputCols = document.getElementById('cols').value;
-            const divsIndex = Math.floor(inputRows / 2);
-            const divs = document.querySelectorAll('#gameContainer div');
-            const targetElement = divs[divsIndex];
-            targetElement.scrollIntoView({ behavior: 'smooth' });
-
-            if (inputRows >= 25 || inputCols >= 25) {
-                let scaleNum;
-                if (inputRows >= inputCols) {
-                    scaleNum = 1 - (inputRows-10) * 0.01;
-                } else {
-                    scaleNum = 1 - (inputCols-10) * 0.01;
-                }
-
-                document.getElementById('gameContainer').style.transform = `scale(${scaleNum})`;
-            }
-
-        });
-    </script> -->
 </body>
 
 </html>

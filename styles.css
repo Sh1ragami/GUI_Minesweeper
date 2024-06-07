@@ -3,7 +3,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: rgba(0, 0, 0, 0.788);
+    background-color: rgb(119, 119, 119);
 }
 
 .menu {
@@ -17,6 +17,14 @@ h1 {
     font-size: 50px;
     text-shadow: 4px 4px 0px rgba(242, 13, 13, 0.5), 8px 8px 0px rgba(0, 0, 0, 0.2);
     font-weight: bold;
+}
+
+h2 {
+    color: whitesmoke;
+}
+
+p {
+    color: whitesmoke;
 }
 
 .property {
