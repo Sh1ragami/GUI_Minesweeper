@@ -9,20 +9,21 @@
 </head>
 
 <body>
-        <h1>Minesweeper Game</h1>
+    <h1>Minesweeper Game</h1>
 
-        <div class="property">
-            <label for="rows">行数:</label>
-            <input type="number" id="rows" name="rows" min="1" value="10" required><br>
+    <div class="property">
+        <label for="rows">行数:</label>
+        <input type="number" id="rows" name="rows" min="1" value="10" required><br>
 
-            <label for="cols">列数:</label>
-            <input type="number" id="cols" name="cols" min="1" value="10" required><br>
+        <label for="cols">列数:</label>
+        <input type="number" id="cols" name="cols" min="1" value="10" required><br>
 
-            <label for="mines">地雷数:</label>
-            <input type="number" id="mines" name="mines" min="1" value="10" required>
-        </div><br>
+        <label for="mines">地雷数:</label>
+        <input type="number" id="mines" name="mines" min="1" value="10" required>
+    </div><br>
 
-        <button id="startGame">START GAME</button>
+    <button id="startGame">START GAME</button>
+    <!-- <button id="scrollBoard">Scroll Center</button> -->
 
     <div id="gameContainer">
         <!-- この中にマインスイーパーの盤を作成 -->
@@ -31,20 +32,28 @@
     <script src="script.js"></script>
 
     <!-- startGameボタンを押したときに、ゲームボードの中心にページを移動する -->
-    <script>
-        document.getElementById('startGame').addEventListener('click', function () {
-            const inputValue = document.getElementById('rows').value;
-            const divsIndex = Math.floor(inputValue / 2);
+    <!-- <script>
+        document.getElementById('scrollBoard').addEventListener('click', function () {
+            const inputRows = document.getElementById('rows').value;
+            const inputCols = document.getElementById('cols').value;
+            const divsIndex = Math.floor(inputRows / 2);
             const divs = document.querySelectorAll('#gameContainer div');
             const targetElement = divs[divsIndex];
             targetElement.scrollIntoView({ behavior: 'smooth' });
 
-            // if (inputValue >= 25) {
-            //     const scaleNum = 1 - inputValue * 0.01
-            //     document.getElementById('gameContainer').style.transform = 'scale({scaleNum})';
-            // }
+            if (inputRows >= 25 || inputCols >= 25) {
+                let scaleNum;
+                if (inputRows >= inputCols) {
+                    scaleNum = 1 - (inputRows-10) * 0.01;
+                } else {
+                    scaleNum = 1 - (inputCols-10) * 0.01;
+                }
+
+                document.getElementById('gameContainer').style.transform = `scale(${scaleNum})`;
+            }
+
         });
-    </script>
+    </script> -->
 </body>
 
 </html>

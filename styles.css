@@ -156,6 +156,11 @@ button:active {
 @media screen and (max-width: 600px) {
     h1 {
         font-size: 30px;
-        text-shadow: 4px 4px 0px rgba(242, 13, 13, 0.5), 8px 8px 0px rgba(0, 0, 0, 0.2);
+        text-shadow: 4px 4px 0px rgba(242, 13, 13, 0.5), 6px 6px 0px rgba(0, 0, 0, 0.2);
+    }
+
+    #gameContainer {
+        transform: scale(0.8);
+        margin-top: 0px;
     }
 }

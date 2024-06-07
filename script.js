@@ -1,5 +1,4 @@
 document.getElementById('startGame').addEventListener('click', () => {
-
     const rows = parseInt(document.getElementById('rows').value);
     const cols = parseInt(document.getElementById('cols').value);
     const mines = parseInt(document.getElementById('mines').value);
@@ -8,7 +7,7 @@ document.getElementById('startGame').addEventListener('click', () => {
         alert('有効な数値を入力してください。');
         return;
     }
-    
+
     alert('操作説明\n　左クリック：採掘\n　右クリック：フラグ');
 
     fetch('server.php', {
@@ -73,11 +72,11 @@ function openCell(cellElement, isFirstClick = false) {
         .then(data => {
             if (data.result === 'mine') {
                 showAllMines(data.board);
-                alert('ゲームオーバー!!');
+                alert('GAME OVER!!');
                 document.getElementById('startGame').disabled = false;
             } else if (data.result === 'clear') {
                 updateCells(data.openedCells);
-                alert('ゲームクリア!');
+                alert('GAME CLEAR!');
                 document.getElementById('startGame').disabled = false;
             } else {
                 updateCells(data.openedCells);
@@ -89,9 +88,9 @@ function openCell(cellElement, isFirstClick = false) {
 function updateCells(openedCells) {
     openedCells.forEach(cell => {
         const cellElement = document.querySelector(`[data-row='${cell.row}'][data-col='${cell.col}']`);
-        cellElement.classList.add('open', `number${cell.adjacentMines}`);
-        if (cell.adjacentMines > 0) {
-            cellElement.textContent = cell.adjacentMines;
+        cellElement.classList.add('open', `number${cell.aroundMines}`);
+        if (cell.aroundMines > 0) {
+            cellElement.textContent = cell.aroundMines;
         }
     });
 }
