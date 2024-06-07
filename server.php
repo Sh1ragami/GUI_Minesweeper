@@ -73,6 +73,7 @@ function openCell($row, $col)
         session_destroy();
         return;
     }
+    
     $openedCells = [];
     openAroundCells($board, $opened, $row, $col, $openedCells, $openedCount, true);
     if ($openedCount === $rows * $cols - $mines) {

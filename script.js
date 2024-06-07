@@ -2,9 +2,9 @@
 document.getElementById('startGame').addEventListener('click', startGame);
 
 function startGame() {
-    var rows = parseInt(document.getElementById('rows').value);
-    var cols = parseInt(document.getElementById('cols').value);
-    var mines = parseInt(document.getElementById('mines').value);
+    const rows = parseInt(document.getElementById('rows').value);
+    const cols = parseInt(document.getElementById('cols').value);
+    const mines = parseInt(document.getElementById('mines').value);
 
     if (rows <= 0 || cols <= 0 || mines <= 0 || mines >= rows * cols) {
         alert('有効な数値を入力してください。');
