@@ -4,15 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minesweeper Game</title>
+    <title>Minesweeper.Game</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-    <h1>Minesweeper Game</h1>
+    <h1>Minesweeper. Game</h1>
 
     <nav>
+        <img src="images/backDeco2.png" alt="岩の画像">
+        <img src="images/backDeco2.png" alt="岩の画像">
+
         <div class="property">
+
             <label for="rows">行数:</label>
             <input type="number" id="rows" name="rows" min="1" value="10" required><br>
 
@@ -26,16 +30,17 @@
         <button id="startGame">START GAME</button>
     </nav>
 
+
     <div id="gameContainer">
         <!-- この中にマインスイーパーの盤を作成 -->
     </div>
 
-    <h2>---------------------------------  ゲームのルール  --------------------------------</h2>
+    <h2><span>GAME RULE</span></h2>
     <p>
-        ゲーム画面は正方形のマスが敷き詰められた長方形のフィールドから構成されている。それぞれの<br>
-        マスは開けることができるが、地雷の置かれているマスを開けると負けとなる。地雷の置かれてい<br>
-        ないマスを開けたときは、隣接する8方向のマスのいずれかに地雷がある場合はその個数が表示さ<br>
-        れ、隣接するマスに地雷が置かれていないときは、それらが自動的に開けられる。地雷の置かれて<br>
+        ゲーム画面は正方形のマスが敷き詰められた長方形のフィールドから構成されている。それぞれの
+        マスは開けることができるが、地雷の置かれているマスを開けると負けとなる。地雷の置かれてい
+        ないマスを開けたときは、隣接する8方向のマスのいずれかに地雷がある場合はその個数が表示さ
+        れ、隣接するマスに地雷が置かれていないときは、それらが自動的に開けられる。地雷の置かれて
         いないマスをすべて開ければ勝ちとなる。
     </p>
 

@@ -11,7 +11,7 @@ function startGame() {
         return;
     }
 
-    alert('操作説明\n　左クリック：採掘\n　右クリック：フラグ');
+    // alert('操作説明\n　左クリック：採掘\n　右クリック：フラグ');
 
     const navElements = document.getElementsByTagName('nav');
     if (navElements.length > 0) {
@@ -20,7 +20,7 @@ function startGame() {
         nav.innerHTML = '';
         const reStartButton = document.createElement('button');
         reStartButton.id = 'backMenu';
-        reStartButton.textContent = '戻る';
+        reStartButton.textContent = 'BACK MENU';
 
         nav.appendChild(reStartButton);
 
@@ -144,6 +144,14 @@ function createMenuBoard() {
     const nav = document.getElementsByTagName('nav')[0];
     nav.innerHTML = '';
 
+    const image1 = document.createElement('img')
+    image1.src = 'images/backDeco2.png';
+    image1.alt = '岩の画像';
+
+    const image2 = document.createElement('img')
+    image2.src = 'images/backDeco2.png';
+    image2.alt = '岩の画像';
+
     // div.property要素を作成
     const propertyDiv = document.createElement('div');
     propertyDiv.className = 'property';
@@ -195,6 +203,8 @@ function createMenuBoard() {
     propertyDiv.appendChild(minesInput);
 
     // div.propertyをnavに追加
+    nav.appendChild(image1);
+    nav.appendChild(image2);
     nav.appendChild(propertyDiv);
 
     // START GAMEボタンを作成してnavに追加
