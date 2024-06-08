@@ -19,6 +19,7 @@ function initializeGame($rows, $cols, $mines)
     $_SESSION['opened'] = createEmptyBoard($rows, $cols);
     $_SESSION['openedCount'] = 0;
     $_SESSION['first'] = true;
+    $_SESSION['flagged'] = createEmptyBoard($rows, $cols); // フラグの情報を初期化する
     echo json_encode(['board' => $board, 'rows' => $rows, 'cols' => $cols]);
 }
 
@@ -61,6 +62,7 @@ function openCell($row, $col)
 {
     $board = $_SESSION['board'];
     $opened = &$_SESSION['opened'];
+    $flagged = &$_SESSION['flagged']; // フラグの情報を取得
     $rows = $_SESSION['rows'];
     $cols = $_SESSION['cols'];
     $mines = $_SESSION['mines'];
@@ -70,6 +72,12 @@ function openCell($row, $col)
     if ($first) {
         putMines($board, $rows, $cols, $mines, $row, $col);
         $_SESSION['first'] = false;
+    }
+
+    // フラグが設定されているセルは開かない
+    if ($flagged[$row][$col]) {
+        echo json_encode(['result' => 'flagged']);
+        return;
     }
 
     if ($board[$row][$col] === 'M') {

@@ -1,4 +1,5 @@
 let initialRows, initialCols, initialMines;
+let flagged = []; // フラグの状態を追跡する配列
 
 document.getElementById('startGame').addEventListener('click', startGame);
 
@@ -17,7 +18,8 @@ function startGame() {
     initialCols = cols;
     initialMines = mines;
 
-    // alert('操作説明\n　左クリック：採掘\n　右クリック：フラグ');
+    // フラグの配列を初期化
+    flagged = Array.from({ length: rows }, () => Array(cols).fill(false));
 
     const navElements = document.getElementsByTagName('nav');
     if (navElements.length > 0) {
@@ -93,6 +95,7 @@ function createGameBoard(data) {
     gameContainer.style.gridTemplateColumns = `repeat(${data.cols}, 30px)`;
 
     data.board.forEach((row, rowIndex) => {
+        flagged.push(Array(data.cols).fill(false)); // フラグ配列の更新
         row.forEach((cell, colIndex) => {
             const cellElement = document.createElement('div');
             cellElement.classList.add('cell');
@@ -117,13 +120,14 @@ function createGameBoard(data) {
     });
 }
 
-function toggleFlag(cellElement) {
-    cellElement.classList.toggle('flag');
-}
-
 function openCell(cellElement, isFirstClick = false) {
     const row = cellElement.dataset.row;
     const col = cellElement.dataset.col;
+
+    // フラグが設定されているセルは開かない
+    if (flagged[row][col]) {
+        return;
+    }
 
     fetch('server.php', {
         method: 'POST',
@@ -134,21 +138,36 @@ function openCell(cellElement, isFirstClick = false) {
     })
         .then(response => response.json())
         .then(data => {
+            if (data.result === 'flagged') {
+                // フラグが設定されているセルは開かないため、処理しない
+                return;
+            }
             if (data.result === 'mine') {
                 showAllMines(data.board);
                 alert('GAME OVER!!');
                 document.getElementById('startGame').disabled = false;
-
             } else if (data.result === 'clear') {
                 updateCells(data.openedCells);
                 alert('GAME CLEAR!');
                 document.getElementById('startGame').disabled = false;
-
             } else {
                 updateCells(data.openedCells);
             }
         })
         .catch(error => console.error('Error:', error));
+}
+
+function toggleFlag(cellElement) {
+    const row = cellElement.dataset.row;
+    const col = cellElement.dataset.col;
+
+    cellElement.classList.toggle('flag');
+
+    if (cellElement.classList.contains('flag')) {
+        flagged[row][col] = true;
+    } else {
+        flagged[row][col] = false;
+    }
 }
 
 function updateCells(openedCells) {
@@ -176,11 +195,11 @@ function createMenuBoard() {
     const nav = document.getElementsByTagName('nav')[0];
     nav.innerHTML = '';
 
-    const image1 = document.createElement('img')
+    const image1 = document.createElement('img');
     image1.src = 'images/backDeco2.png';
     image1.alt = '岩の画像';
 
-    const image2 = document.createElement('img')
+    const image2 = document.createElement('img');
     image2.src = 'images/backDeco2.png';
     image2.alt = '岩の画像';
 
