@@ -1,4 +1,5 @@
-// START GAMEボタンのクリックイベントを追加
+let initialRows, initialCols, initialMines;
+
 document.getElementById('startGame').addEventListener('click', startGame);
 
 function startGame() {
@@ -11,6 +12,11 @@ function startGame() {
         return;
     }
 
+    // 初回の入力値を保存
+    initialRows = rows;
+    initialCols = cols;
+    initialMines = mines;
+
     // alert('操作説明\n　左クリック：採掘\n　右クリック：フラグ');
 
     const navElements = document.getElementsByTagName('nav');
@@ -18,13 +24,18 @@ function startGame() {
         const nav = navElements[0];
 
         nav.innerHTML = '';
-        const reStartButton = document.createElement('button');
-        reStartButton.id = 'backMenu';
-        reStartButton.textContent = 'BACK MENU';
+        const backMenu = document.createElement('button');
+        backMenu.id = 'backMenu';
+        backMenu.textContent = 'BACK MENU';
 
-        nav.appendChild(reStartButton);
+        const reStart = document.createElement('button');
+        reStart.id = 'reStart';
+        reStart.textContent = 'R';
 
-        reStartButton.addEventListener('click', () => {
+        nav.appendChild(backMenu);
+        nav.appendChild(reStart);
+
+        backMenu.addEventListener('click', () => {
             const gameContainer = document.getElementById('gameContainer');
             gameContainer.innerHTML = '';
             gameContainer.removeAttribute('style');
@@ -36,8 +47,11 @@ function startGame() {
             return;
         });
 
+        reStart.addEventListener('click', () => {
+            // 初回の入力値を使って再スタート
+            startGameWithParams(initialRows, initialCols, initialMines);
+        });
     }
-
 
     fetch('server.php', {
         method: 'POST',
@@ -52,6 +66,24 @@ function startGame() {
 
     // START GAMEボタンのクリックイベントを削除
     document.getElementById('startGame').removeEventListener('click', startGame);
+}
+
+function startGameWithParams(rows, cols, mines) {
+    if (rows <= 0 || cols <= 0 || mines <= 0 || mines >= rows * cols) {
+        alert('有効な数値を入力してください。');
+        return;
+    }
+
+    fetch('server.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ rows, cols, mines })
+    })
+        .then(response => response.json())
+        .then(data => createGameBoard(data))
+        .catch(error => console.error('Error:', error));
 }
 
 function createGameBoard(data) {

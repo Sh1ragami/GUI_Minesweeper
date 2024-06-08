@@ -77,7 +77,8 @@ input {
     font-size: 20px;
 }
 
-button {
+#startGame,
+#backMenu {
     width: 210px;
     background-color: #8b4513;
     color: white;
@@ -92,7 +93,8 @@ button {
     transition: all 0.2s ease;
 }
 
-button::before {
+#startGame::before,
+#backMenu::before {
     content: "";
     position: absolute;
     top: 5px;
@@ -103,12 +105,14 @@ button::before {
     border-radius: 3px;
 }
 
-button:active {
+#startGame:active,
+#backMenu:active {
     box-shadow: 0 2px #5d2d0f;
     transform: translateY(3px);
 }
 
-button:after {
+#startGame::after,
+#backMenu:after {
     content: "";
     position: absolute;
     width: 60%;
@@ -120,8 +124,33 @@ button:after {
     transform: translateX(-50%);
 }
 
-button:hover {
+#startGame:hover,
+#backMenu:hover {
     background-color: #a0522d;
+}
+
+#reStart {
+    background-image: url(images/reStart.png);
+    background-size: 35px;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-left: 40px;
+    background-color: #a0522d;
+    display: inline-block;
+    color: #a0522d;
+    border-radius: 50px;
+    width: 50px;
+    height: 50px;
+    transition: 0.3s;
+
+}
+
+#reStart:hover {
+    transform: translateY(2px);
+}
+
+#backMenu {
+    margin-left: 100px;
 }
 
 img:nth-child(1) {
@@ -223,10 +252,19 @@ img:nth-child(2) {
     color: #7C7C7C;
 }
 
+@media screen and (max-width: 1350px) {
+
+    img:nth-child(1),
+    img:nth-child(2) {
+        width: 0px;
+        height: 0px;
+    }
+}
+
 @media screen and (max-width: 600px) {
     h1 {
         font-size: 30px;
-        text-shadow: 4px 4px 0px rgba(242, 13, 13, 0.5), 6px 6px 0px rgba(0, 0, 0, 0.2);
+        text-shadow: 2px 2px 0px rgba(242, 13, 13, 0.5), 6px 6px 0px rgba(0, 0, 0, 0.2);
     }
 
     h2 {
@@ -242,5 +280,11 @@ img:nth-child(2) {
     #gameContainer {
         transform: scale(0.8);
         margin-top: 0px;
+    }
+
+    img:nth-child(1),
+    img:nth-child(2) {
+        width: 0px;
+        height: 0px;
     }
 }
