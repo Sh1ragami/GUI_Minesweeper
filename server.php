@@ -7,6 +7,8 @@ if (isset($request['rows']) && isset($request['cols']) && isset($request['mines'
     initializeGame($request['rows'], $request['cols'], $request['mines']);
 } elseif (isset($request['action']) && $request['action'] === 'open') {
     openCell($request['row'], $request['col']);
+} elseif (isset($request['action']) && $request['action'] === 'flag') { // フラグのアクションを追加
+    toggleFlag($request['row'], $request['col'], $request['isFlagged']);
 }
 
 function initializeGame($rows, $cols, $mines)
@@ -74,20 +76,47 @@ function openCell($row, $col)
         $_SESSION['first'] = false;
     }
 
-    // フラグが設定されているセルは開かない
-    if ($flagged[$row][$col]) {
-        echo json_encode(['result' => 'flagged']);
-        return;
-    }
-
     if ($board[$row][$col] === 'M') {
         echo json_encode(['result' => 'mine', 'board' => $board]);
         session_destroy();
         return;
     }
 
+    if ($opened[$row][$col] && flagAroundCells($board, $row, $col) == $board[$row][$col]) {
+        $openedCells = [];
+        for ($i = $row - 1; $i <= $row + 1; $i++) {
+            for ($j = $col - 1; $j <= $col + 1; $j++) {
+                if ($i === $row && $j === $col || $flagged[$i][$j]) {
+                    continue;
+                } else if ($board[$i][$j] === 'M') {
+                    echo json_encode(['result' => 'mine', 'board' => $board]);
+                    session_destroy();
+                    return;
+                } else {
+                    $opened[$i][$j] = true;
+                    $openedCells[] = ['row' => $i, 'col' => $j, 'aroundMines' => $board[$i][$j]];
+                    $openedCount++;
+                    openAroundCells($board, $opened, $i, $j, $openedCells, $openedCount);
+                }
+            }
+        }
+        echo json_encode(['result' => 'safe', 'openedCells' => $openedCells]);
+        return;
+    }
+
+    if (isset($request['action']) && $request['action'] === 'flag') {
+        if ($flagged[$row][$col]) {
+            $flagged[$row][$col] = false; // フラグを削除する
+            echo json_encode(['result' => 'unflagged', 'flagged' => $flagged]);
+        } else {
+            $flagged[$row][$col] = true; // フラグを設置する
+            echo json_encode(['result' => 'flagged', 'flagged' => $flagged]);
+        }
+        return;
+    }
+
     $openedCells = [];
-    openAroundCells($board, $opened, $row, $col, $openedCells, $openedCount, true);
+    openAroundCells($board, $opened, $row, $col, $openedCells, $openedCount);
     if ($openedCount === $rows * $cols - $mines) {
         echo json_encode(['result' => 'clear', 'openedCells' => $openedCells]);
         session_destroy();
@@ -96,7 +125,8 @@ function openCell($row, $col)
     }
 }
 
-function openAroundCells($board, &$opened, $row, $col, &$openedCells, &$openedCount, $firstFlag)
+
+function openAroundCells($board, &$opened, $row, $col, &$openedCells, &$openedCount)
 {
     if (!isset($board[$row][$col]) || $opened[$row][$col]) {
         return;
@@ -104,16 +134,40 @@ function openAroundCells($board, &$opened, $row, $col, &$openedCells, &$openedCo
     $opened[$row][$col] = true;
     $openedCells[] = ['row' => $row, 'col' => $col, 'aroundMines' => $board[$row][$col]];
     $openedCount++;
-    if ($board[$row][$col] === 0 || $board[$row][$col] == flagAroundCells() && $firstFlag) {
+    if ($board[$row][$col] === 0) {
         for ($i = $row - 1; $i <= $row + 1; $i++) {
             for ($j = $col - 1; $j <= $col + 1; $j++) {
                 if ($i === $row && $j === $col) continue;
-                openAroundCells($board, $opened, $i, $j, $openedCells, $openedCount, false);
+                openAroundCells($board, $opened, $i, $j, $openedCells, $openedCount);
             }
         }
     }
 }
 
-function flagAroundCells()
+function flagAroundCells($board, $row, $col)
 {
+    $flagged = &$_SESSION['flagged'];
+    $rows = $_SESSION['rows'];
+    $cols = $_SESSION['cols'];
+    $count = 0;
+
+    for ($i = $row - 1; $i <= $row + 1; $i++) {
+        for ($j = $col - 1; $j <= $col + 1; $j++) {
+            if (isset($board[$i][$j]) && $flagged[$i][$j]) {
+                $count++;
+            }
+        }
+    }
+    return $count;
+}
+
+function toggleFlag($row, $col, $isFlagged)
+{
+    $flagged = &$_SESSION['flagged'];
+    $flagged[$row][$col] = $isFlagged;
+    if ($isFlagged) {
+        echo json_encode(['result' => 'flagged', 'flagged' => $flagged]);
+    } else {
+        echo json_encode(['result' => 'unflagged', 'flagged' => $flagged]);
+    }
 }

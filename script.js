@@ -138,10 +138,6 @@ function openCell(cellElement, isFirstClick = false) {
     })
         .then(response => response.json())
         .then(data => {
-            if (data.result === 'flagged') {
-                // フラグが設定されているセルは開かないため、処理しない
-                return;
-            }
             if (data.result === 'mine') {
                 showAllMines(data.board);
                 alert('GAME OVER!!');
@@ -168,7 +164,26 @@ function toggleFlag(cellElement) {
     } else {
         flagged[row][col] = false;
     }
+
+    fetch('server.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ action: 'flag', row, col, isFlagged: flagged[row][col] })
+    })
+        .then(response => response.json())
+        .then(data => {
+            // フラグが設置または削除された後の処理を行う
+            if (data.result === 'flagged') {
+                console.log('Flag set successfully');
+            } else if (data.result === 'unflagged') {
+                console.log('Flag removed successfully');
+            }
+        })
+        .catch(error => console.error('Error:', error));
 }
+
 
 function updateCells(openedCells) {
     openedCells.forEach(cell => {

@@ -44,10 +44,28 @@ h2 span {
     background-color: rgb(36, 32, 58);
 }
 
-p {
+table {
     color: whitesmoke;
-    width: 600px;
+    width: 650px;
 }
+
+th {
+    font-size: 20px;
+    padding: 10px;
+    color: #ff1a1a;
+}
+
+tr td:nth-of-type(1) {
+    width: 150px;
+    text-align: center;
+    color: rgb(34, 230, 28);
+}
+
+td {
+    padding: 10px;
+    border: whitesmoke solid 2px;
+}
+
 
 .property {
     text-align: center;
@@ -286,5 +304,17 @@ img:nth-child(2) {
     img:nth-child(2) {
         width: 0px;
         height: 0px;
+    }
+
+    table {
+        width: 380px;
+    }
+
+    td {
+        font-size: 12px;
+    }
+
+    tr td:nth-of-type(1) {
+        width: 80px;
     }
 }
