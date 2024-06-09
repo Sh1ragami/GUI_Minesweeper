@@ -84,8 +84,8 @@ function openCell($row, $col)
 
     if ($opened[$row][$col] && flagAroundCells($board, $row, $col) == $board[$row][$col]) {
         $openedCells = [];
-        for ($i = $row - 1; $i <= $row + 1; $i++) {
-            for ($j = $col - 1; $j <= $col + 1; $j++) {
+        for ($i = max(0, $row - 1); $i <= min($rows - 1, $row + 1); $i++) {
+            for ($j = max(0, $col - 1); $j <= min($cols - 1, $col + 1); $j++) {
                 if ($i === $row && $j === $col || $flagged[$i][$j]) {
                     continue;
                 } else if ($board[$i][$j] === 'M') {
@@ -126,14 +126,18 @@ function openCell($row, $col)
 }
 
 
+
 function openAroundCells($board, &$opened, $row, $col, &$openedCells, &$openedCount)
 {
     if (!isset($board[$row][$col]) || $opened[$row][$col]) {
         return;
     }
+
+    // セルがまだ開かれていない場合のみカウントを増やす
     $opened[$row][$col] = true;
     $openedCells[] = ['row' => $row, 'col' => $col, 'aroundMines' => $board[$row][$col]];
     $openedCount++;
+
     if ($board[$row][$col] === 0) {
         for ($i = $row - 1; $i <= $row + 1; $i++) {
             for ($j = $col - 1; $j <= $col + 1; $j++) {
