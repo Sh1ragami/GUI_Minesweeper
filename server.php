@@ -76,6 +76,12 @@ function openCell($row, $col)
         $_SESSION['first'] = false;
     }
 
+    // フラグが立っている場合、セルを開かない
+    if ($flagged[$row][$col]) {
+        echo json_encode(['result' => 'flagged', 'flagged' => $flagged]);
+        return;
+    }
+
     if ($board[$row][$col] === 'M') {
         echo json_encode(['result' => 'mine', 'board' => $board]);
         session_destroy();
@@ -104,17 +110,6 @@ function openCell($row, $col)
         return;
     }
 
-    if (isset($request['action']) && $request['action'] === 'flag') {
-        if ($flagged[$row][$col]) {
-            $flagged[$row][$col] = false; // フラグを削除する
-            echo json_encode(['result' => 'unflagged', 'flagged' => $flagged]);
-        } else {
-            $flagged[$row][$col] = true; // フラグを設置する
-            echo json_encode(['result' => 'flagged', 'flagged' => $flagged]);
-        }
-        return;
-    }
-
     $openedCells = [];
     openAroundCells($board, $opened, $row, $col, $openedCells, $openedCount);
     if ($openedCount === $rows * $cols - $mines) {
@@ -124,6 +119,7 @@ function openCell($row, $col)
         echo json_encode(['result' => 'safe', 'openedCells' => $openedCells]);
     }
 }
+
 
 
 
