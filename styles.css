@@ -44,6 +44,10 @@ h2 span {
     background-color: rgb(36, 32, 58);
 }
 
+strong {
+    color: yellowgreen;
+}
+
 table {
     color: whitesmoke;
     width: 650px;
