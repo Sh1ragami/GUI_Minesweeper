@@ -71,6 +71,15 @@ td {
     border: whitesmoke solid 2px;
 }
 
+footer {
+    display: block;
+    width: 100%;
+    margin-top: 50px;
+    text-align: center;
+    color: whitesmoke;
+    background-color: rgb(54, 48, 85);
+}
+
 
 .property {
     text-align: center;
