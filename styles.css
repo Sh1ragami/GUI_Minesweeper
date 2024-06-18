@@ -311,6 +311,7 @@ img:nth-child(2) {
     footer p {
         display: block;
         margin: 0 auto;
+        margin-bottom: 15px;
     }
 
     #gameContainer {
