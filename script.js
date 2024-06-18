@@ -21,6 +21,7 @@ function startGame() {
     // フラグの配列を初期化
     flagged = Array.from({ length: rows }, () => Array(cols).fill(false));
 
+    // html要素を操作して、ゲームフィールドを作成
     const navElements = document.getElementsByTagName('nav');
     if (navElements.length > 0) {
         const nav = navElements[0];
@@ -43,9 +44,6 @@ function startGame() {
             gameContainer.removeAttribute('style');
 
             createMenuBoard();
-
-            // backMenuボタンを押した後、startGameボタンを有効にする
-            document.getElementById('startGame').disabled = false;
             return;
         });
 
@@ -66,9 +64,6 @@ function startGame() {
         .then(response => response.json())
         .then(data => createGameBoard(data))
         .catch(error => console.error('Error:', error));
-
-    // START GAMEボタンのクリックイベントを削除
-    document.getElementById('startGame').removeEventListener('click', startGame);
 }
 
 function startGameWithParams(rows, cols, mines) {
@@ -145,11 +140,9 @@ function openCell(cellElement, isFirstClick = false) {
             if (data.result === 'mine') {
                 showAllMines(data.board);
                 alert('GAME OVER!!');
-                document.getElementById('startGame').disabled = false;
             } else if (data.result === 'clear') {
                 updateCells(data.openedCells);
                 alert('GAME CLEAR!');
-                document.getElementById('startGame').disabled = false;
             } else {
                 updateCells(data.openedCells);
             }

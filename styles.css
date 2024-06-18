@@ -51,7 +51,6 @@ strong {
 table {
     color: whitesmoke;
     width: 650px;
-    text-align: center;
 }
 
 th {
@@ -294,9 +293,9 @@ img:nth-child(2) {
     }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 650px) {
     h1 {
-        font-size: 30px;
+        font-size: 35px;
         text-shadow: 2px 2px 0px rgba(242, 13, 13, 0.5), 6px 6px 0px rgba(0, 0, 0, 0.2);
     }
 
@@ -307,10 +306,10 @@ img:nth-child(2) {
 
     p {
         font-size: 13px;
-        width: 280px;
     }
 
-    table + p {
+    footer p {
+        display: block;
         margin: 0 auto;
     }
 
@@ -329,8 +328,13 @@ img:nth-child(2) {
         width: 380px;
     }
 
+    th {
+        font-size: 15px;
+        text-shadow: 2px 2px 0px rgba(189, 19, 19, 0.5), 4px 4px 0px rgba(0, 0, 0, 0.2);
+    }
+
     td {
-        font-size: 12px;
+        font-size: 10px;
     }
 
     tr td:nth-of-type(1) {

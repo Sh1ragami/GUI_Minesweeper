@@ -30,13 +30,13 @@ function createEmptyBoard($rows, $cols)
     return array_fill(0, $rows, array_fill(0, $cols, 0));
 }
 
-function putMines(&$board, $rows, $cols, $mines, $safeRow, $safeCol)
+function putMines(&$board, $rows, $cols, $mines, $openedRow, $openedCol)
 {
     $minePositions = [];
 
     while (count($minePositions) < $mines) {
         $position = [rand(0, $rows - 1), rand(0, $cols - 1)];
-        if (!in_array($position, $minePositions) && !($position[0] == $safeRow && $position[1] == $safeCol)) {
+        if (!in_array($position, $minePositions) && !($position[0] == $openedRow && $position[1] == $openedCol)) {
             $minePositions[] = $position;
             $board[$position[0]][$position[1]] = 'M';
         }
@@ -76,12 +76,6 @@ function openCell($row, $col)
         $_SESSION['first'] = false;
     }
 
-    // フラグが立っている場合、セルを開かない
-    // if ($flagged[$row][$col]) {
-    //     echo json_encode(['result' => 'flagged', 'flagged' => $flagged]);
-    //     return;
-    // }
-
     if ($board[$row][$col] === 'M') {
         echo json_encode(['result' => 'mine', 'board' => $board]);
         session_destroy();
@@ -120,8 +114,6 @@ function openCell($row, $col)
         echo json_encode(['result' => 'safe', 'openedCells' => $openedCells]);
     }
 }
-
-
 
 
 function openAroundCells($board, &$opened, $row, $col, &$openedCells, &$openedCount)
