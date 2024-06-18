@@ -7,7 +7,7 @@ if (isset($request['rows']) && isset($request['cols']) && isset($request['mines'
     initializeGame($request['rows'], $request['cols'], $request['mines']);
 } elseif (isset($request['action']) && $request['action'] === 'open') {
     openCell($request['row'], $request['col']);
-} elseif (isset($request['action']) && $request['action'] === 'flag') { // フラグのアクションを追加
+} elseif (isset($request['action']) && $request['action'] === 'flag') {
     toggleFlag($request['row'], $request['col'], $request['isFlagged']);
 }
 
@@ -21,7 +21,7 @@ function initializeGame($rows, $cols, $mines)
     $_SESSION['opened'] = createEmptyBoard($rows, $cols);
     $_SESSION['openedCount'] = 0;
     $_SESSION['first'] = true;
-    $_SESSION['flagged'] = createEmptyBoard($rows, $cols); // フラグの情報を初期化する
+    $_SESSION['flagged'] = createEmptyBoard($rows, $cols);
     echo json_encode(['board' => $board, 'rows' => $rows, 'cols' => $cols]);
 }
 
@@ -64,7 +64,7 @@ function openCell($row, $col)
 {
     $board = $_SESSION['board'];
     $opened = &$_SESSION['opened'];
-    $flagged = &$_SESSION['flagged']; // フラグの情報を取得
+    $flagged = &$_SESSION['flagged'];
     $rows = $_SESSION['rows'];
     $cols = $_SESSION['cols'];
     $mines = $_SESSION['mines'];
@@ -77,10 +77,10 @@ function openCell($row, $col)
     }
 
     // フラグが立っている場合、セルを開かない
-    if ($flagged[$row][$col]) {
-        echo json_encode(['result' => 'flagged', 'flagged' => $flagged]);
-        return;
-    }
+    // if ($flagged[$row][$col]) {
+    //     echo json_encode(['result' => 'flagged', 'flagged' => $flagged]);
+    //     return;
+    // }
 
     if ($board[$row][$col] === 'M') {
         echo json_encode(['result' => 'mine', 'board' => $board]);
@@ -88,6 +88,7 @@ function openCell($row, $col)
         return;
     }
 
+    // 自動採掘の初回処理
     if ($opened[$row][$col] && flagAroundCells($board, $row, $col) == $board[$row][$col]) {
         $openedCells = [];
         for ($i = max(0, $row - 1); $i <= min($rows - 1, $row + 1); $i++) {

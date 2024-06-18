@@ -55,6 +55,7 @@ function startGame() {
         });
     }
 
+    // ボード作成に必要な情報をjson形式で送信
     fetch('server.php', {
         method: 'POST',
         headers: {
@@ -102,12 +103,15 @@ function createGameBoard(data) {
             cellElement.dataset.row = rowIndex;
             cellElement.dataset.col = colIndex;
 
+            // セルを開く処理
             cellElement.addEventListener('click', () => {
                 const audio = new Audio('audio/sound.mp3');
                 audio.currentTime = 0;
                 audio.play();
                 openCell(cellElement, true);
             });
+
+            // フラグの設置/削除の処理
             cellElement.addEventListener('contextmenu', (e) => {
                 e.preventDefault();
                 const audio = new Audio('audio/sound.mp3');
