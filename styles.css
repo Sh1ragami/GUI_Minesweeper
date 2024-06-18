@@ -51,6 +51,7 @@ strong {
 table {
     color: whitesmoke;
     width: 650px;
+    text-align: center;
 }
 
 th {
@@ -307,6 +308,10 @@ img:nth-child(2) {
     p {
         font-size: 13px;
         width: 280px;
+    }
+
+    table + p {
+        margin: 0 auto;
     }
 
     #gameContainer {
