@@ -18,8 +18,16 @@
 
 ## ページ画像
 ***
-<img width="300" src="./README_img/minesweeperTop.png">
-<img width="300" src="./README_img/minesweeperPlay.png">
-<img width="300" src="./README_img/minesweeperBoard.png">
-
+<table>
+  <thead>
+    <tr>
+      <th>Top</th><th>Play</th><th>Board</th>
+    </tr>
+  </thead>
+ <tr>
+  <td><img width="300" src="./README_img/minesweeperTop.png"></td>
+  <td><img width="300" src="./README_img/minesweeperPlay.png"></td>
+  <td><img width="300" src="./README_img/minesweeperBoard.png"></td>
+ </tr>
+</table>
 
