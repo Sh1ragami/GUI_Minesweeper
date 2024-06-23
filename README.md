@@ -18,10 +18,11 @@
   ***
 
 ## Top画面!
-[top](./README_img/minesweeperTop.png)<br>
+<img width="300" src="./README_img/minesweeperTop.png">
 
 ## GamePlay画面
-![play](./README_img/minesweeperPlay.png)
+<img width="300" src="./README_img/minesweeperPlay.png">
 ## GameBoard　例
-![Board](./README_img/minesweeperBoard.png)
+<img width="300" src="./README_img/minesweeperBoard.png">
+
 
