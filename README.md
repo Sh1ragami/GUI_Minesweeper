@@ -15,15 +15,13 @@
  ***
  　左クリック　採掘<br>
  　右クリック　フラグを設置<br>
-  ***
 
-**Top画面!**
+## ページ画像
+***
 <img width="300" src="./README_img/minesweeperTop.png">
 
-**GamePlay画面**
 <img width="300" src="./README_img/minesweeperPlay.png">
 
-**GameBoard**
 <img width="300" src="./README_img/minesweeperBoard.png">
 
 
