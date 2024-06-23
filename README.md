@@ -17,12 +17,13 @@
  　右クリック　フラグを設置<br>
   ***
 
-## Top画面!
+**Top画面!**
 <img width="300" src="./README_img/minesweeperTop.png">
 
-## GamePlay画面
+**GamePlay画面**
 <img width="300" src="./README_img/minesweeperPlay.png">
-## GameBoard　例
+
+**GameBoard**
 <img width="300" src="./README_img/minesweeperBoard.png">
 
 
