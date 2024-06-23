@@ -13,4 +13,7 @@ Title <マインスイーパー><br><br>
  　左クリック　採掘<br>
  　右クリック　フラグを設置<br>
 
-!{width:300px}[top](./README_img/minesweeperTop.png)
+![top](./README_img/minesweeperTop.png)
+![play](./README_img/minesweeperPlay.png)
+![Board](./README_img/minesweeperBoard.png)
+
